@@ -1,0 +1,65 @@
+﻿@model AspNetCheckedListExample.Models.PeopleSelectionViewModel
+
+@{
+    ViewBag.Title = "People";
+}
+
+<h2>People</h2>
+
+@using (Html.BeginForm("SubmitSelected", "People", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+{
+    // Add a new checkbox in its own div element:
+    <div>
+        <input type="checkbox" id="checkall" /><span>Check All</span>
+    </div>
+
+    // Wrap the table element in a div named "checkboxes":
+    <div id="checkboxes">
+        <table class="table">
+            <tr>
+                <th>
+                    Select
+                </th>
+                <th>
+                    Name
+                </th>
+                <th></th>
+            </tr>
+            @Html.EditorFor(model => model.People)
+        </table>
+    @*Close the "checkboxes" div element:*@
+    </div>
+    <hr />
+    <br />
+    <input type="submit" name="operation" id="submit" value="Submit Selected" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function toggleChecked(status) {
+            $("#checkboxes input").each(function () {
+
+                // Set the checked status of each to match the 
+                // checked status of the check all checkbox:
+                $(this).prop("checked", status);
+            });
+        }
+
+        $(document).ready(function () {
+
+            //Set the default value of the global checkbox to true:
+            $("#checkall").prop('checked', true);
+
+            // Attach the call to toggleChecked to the
+            // click event of the global checkbox:
+            $("#checkall").click(function () {
+                var status = $("#checkall").prop('checked');
+                toggleChecked(status);
+            });
+        });
+    </script>
+}
+

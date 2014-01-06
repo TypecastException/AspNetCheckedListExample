@@ -1,0 +1,18 @@
+﻿@model AspNetCheckedListExample.Models.SelectPersonEditorViewModel
+<tr>
+    <td style="text-align:center">
+        @Html.CheckBoxFor(model => model.Selected)
+    </td>
+    <td>
+        @Html.DisplayFor(model => model.Name)
+    </td>
+    <td>
+        @Html.HiddenFor(model => model.Id)
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+    </td>
+</tr>
